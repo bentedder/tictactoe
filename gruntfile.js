@@ -12,7 +12,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask("lint", [ "jscs", "jshint" ]);
-  grunt.registerTask("style", [ "sass" ]);
+  grunt.registerTask("style", [ "sass", "autoprefixer" ]);
   grunt.registerTask("files", [ "copy" ]);
 
 };

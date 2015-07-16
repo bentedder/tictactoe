@@ -4,7 +4,8 @@ module.exports = {
     dest: "dist/app.js",
     options: {
       transform: [
-        [ "babelify", { loose: "all"} ]
+        [ "babelify", { loose: "all"} ],
+        [ "reactify", { "es6": true } ]
       ]
     }
   }

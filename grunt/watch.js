@@ -16,7 +16,7 @@ module.exports = {
   },
 
   js: {
-    files: ["src/**/*.js"],
+    files: ["src/**/*.js", "src/**/*.jsx"],
     tasks: ["browserify"]
   }
 };

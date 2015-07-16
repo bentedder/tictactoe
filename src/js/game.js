@@ -1,5 +1,8 @@
 import _ from "underscore";
 import Grid from "./grid";
+const React = require("react");
+import GameView from "./gameView.jsx";
+
 
 class Game {
 
@@ -7,10 +10,17 @@ class Game {
     this.players = [];
     this.currentPlayer = 0;
     this.grid = new Grid({ size: 3 });
+
+    this.createBoard();
   }
 
   addPlayer(player) {
     this.players.push(player);
+  }
+
+  createBoard() {
+    // jscs:disable
+    React.render(<GameView />, document.getElementById('application') );
   }
 
   start() {
