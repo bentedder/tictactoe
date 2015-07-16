@@ -1,0 +1,22 @@
+{
+  "name": "tictactoe",
+  "version": "1.0.0",
+  "description": "Your challenge, should you choose to accept it, is to write a tic-tac-toe interface (AI) that never allows the challenger (user) to win.",
+  "main": "outcomes.js",
+  "scripts": {
+    "babel-node": "babel-node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bentedder/tictactoe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bentedder/tictactoe/issues"
+  },
+  "homepage": "https://github.com/bentedder/tictactoe",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}
