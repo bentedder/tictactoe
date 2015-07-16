@@ -1,9 +1,9 @@
-import _ from "underscore"
+import _ from "underscore";
 
 class Grid {
 
   constructor(options) {
-    this.size = options.size
+    this.size = options.size;
     this.spaces = [];
     console.log("starting a new " + this.size + "x" + this.size + " grid");
     this.createSpaces();

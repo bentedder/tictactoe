@@ -1,9 +1,9 @@
-import _ from 'underscore';
-import Grid from './grid';
+import _ from "underscore";
+import Grid from "./grid";
 
 class Game {
 
-  constructor(options) {
+  constructor() {
     this.players = [];
     this.currentPlayer = 0;
     this.grid = new Grid({ size: 3 });
@@ -50,10 +50,9 @@ class Game {
 
   turn(choice) {
     let p = this.players[this.currentPlayer];
-    console.log("------");
     console.log(p.name + " has played " + p.getSpacesPlayed().length + " times");
-    if(!choice) {
-      var choice = this.findOptimalChoice();
+    if (!choice) {
+      choice = this.findOptimalChoice();
     }
     this.grid.removeSpace(choice);
     console.log(p.name + " chose " + choice);
@@ -63,7 +62,7 @@ class Game {
 
   findOptimalChoice() {
     let canIWin = this.canIWin();
-    let canOpponentWin = this.canOpponentWin();
+    // let canOpponentWin = this.canOpponentWin();
     
     console.log(canIWin);
     return _.random(0,8);
@@ -72,20 +71,20 @@ class Game {
   canIWin() {
     var player = this.players[this.currentPlayer];
     let played = player.getSpacesPlayed();
-    if(played.length < 2) {
+    if (played.length < 2) {
       return false;
     } else {
       var groups = _.groupBy(played, function(space) {
-        return space.row
+        return space.row;
       });
       return groups;
     }
     return true;
   }
 
-  canOpponentWin(player) {
+  canOpponentWin() {
     var player = this.players[1 - this.currentPlayer];
-    if(player.spacesPlayed.length < 2) return false;
+    if (player.spacesPlayed.length < 2) return false;
     return true;
   }
 
