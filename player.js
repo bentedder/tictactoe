@@ -5,10 +5,12 @@ class Player {
     this.spacesPlayed = [];
   }
 
-  updateSpaces(space) {
+  addSpace(space) {
     this.spacesPlayed.push(space);
-    console.log(this.name + " played space " + space);
-    console.log(this.spacesPlayed);
+  }
+
+  getSpacesPlayed() {
+    return this.spacesPlayed;
   }
 }
 

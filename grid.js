@@ -26,6 +26,14 @@ class Grid {
     this.spaces.splice(choice, 1);
   }
 
+  getSpaceAtIndex(index) {
+    return this.spaces[index];
+  }
+
+  getAvailableSpaces() {
+    return this.spaces;
+  }
+
 }
 
 export default Grid;
