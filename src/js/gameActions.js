@@ -14,8 +14,15 @@ export default {
 
   updateScore: (score) => {
     GameDispatcher.handleClientAction({
-      type: ActionTypes.UPDATESCORE,
+      type: ActionTypes.UPDATE_SCORE,
       data: { score: score }
-    })
+    });
+  },
+
+  createSquares: (squares) => {
+    GameDispatcher.handleClientAction({
+      type: ActionTypes.CREATE_SQUARES,
+      data: { squares: squares }
+    });
   }
 }

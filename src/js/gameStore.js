@@ -6,13 +6,14 @@ let ActionTypes = GameConstants.ActionTypes;
 
 let data = {
   message: "waiting to start",
-  score: 0
+  score: 0,
+  squares: []
 };
 
 class GameStore extends EventEmitter {
 
   getState() {
-    return data
+    return data;
   }
 
   emitChange() {
@@ -43,6 +44,11 @@ GameDispatcher.register((payload) => {
     case ActionTypes.UPDATE_SCORE:
       data.score = action.data.score;
       _GameStore.emitChange();
+      break;
+    case ActionTypes.CREATE_SQUARES:
+      data.squares = action.data.squares;
+      _GameStore.emitChange();
+      break;
     default:
       break;
   }
