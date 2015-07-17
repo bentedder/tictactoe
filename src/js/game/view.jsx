@@ -7,9 +7,8 @@ class GameView extends BaseView {
   render() {
     return (
       <div className='game'>
-        Turn: {this.state.activeUser}
-        <Board squares={this.state.squares} />
-        <Scorecard score={this.state.score}/>
+        <Board squares={this.state.squares} user={this.state.activeUser} />
+        <Scorecard score={this.state.score} user={this.state.activeUser} />
       </div>
     )
   }

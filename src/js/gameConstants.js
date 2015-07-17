@@ -6,6 +6,7 @@ module.exports = {
     SELECT_SQUARE: null,
     UPDATE_SCORE: null,
     SEND_MESSAGE: null,
+    GAME_OVER: null
   }),
 
   PayloadSources: KeyMirror({

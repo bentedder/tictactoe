@@ -7,6 +7,7 @@ class Scorecard extends BaseView {
       <div className='scorecard'>
         <div className='score-bot'>Bot: {this.props.score.bot}</div>
         <div className='score-human'>Human: {this.props.score.human}</div>
+        <div className='turn'>Turn: {this.props.user}</div>
       </div>
     )
   }

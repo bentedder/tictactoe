@@ -1,20 +1,78 @@
 .board {
-  width: 330px;
-  height: 330px;
-  margin: 10px auto;
+  width: 70vm;
+  width: 70vmin;
+  height: 70vm;
+  height: 70vmin;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   .square {
     display: block;
     float: left;
-    margin: 10px 10px 0 0;
-    width: 100px;
-    height: 100px;
-    background: #fff;
+    margin: 0;
+    width: 33%;
+    height: 33%;
     cursor: pointer;
+    position: relative;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
 
-    &:last-child {
-      margin-right: 0;
+    .square-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ccc;
+    }
+
+    .icon {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      display: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &.o {
+      .icon {
+        &.o {
+          display: block;
+        }
+      }
+    }
+
+    &.x {
+      .icon {
+        &.x {
+          display: block;
+        }
+      }
+    }
+
+    &:hover {
+      .icon {
+        &.x {
+          display: block;
+          line {
+            stroke: #ccc;
+          }
+        }
+      }    
+    }
+
+    &:nth-child(3n) {
+      border-right: none;
+    }
+    @for $i from 7 to 10 {
+      &:nth-child(#{$i}) {
+        border-bottom: none;
+      }
     }
   }
-
 }

@@ -12,8 +12,10 @@ class Board extends BaseView {
     let squares = this.props.squares.map(function(square) {
       return <Square key={square.id} square={square} />
     });
+    let classString = "board ";
+    classString += this.props.user === 0 ? "bot": "human";
     return (
-      <div className='board'>
+      <div className={classString}>
         {squares}
       </div>
     )

@@ -1,5 +1,5 @@
 @import "board";
-@import "messages";
+@import "scorecard";
 
 html,
 body {
@@ -9,27 +9,11 @@ body {
   overflow: hidden;
 }
 
-body {
-  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(240,240,240,1) 100%);
-}
-
-#application {
-  display: flex;
-}
-#game,
-#messages {
+#game {
+  width: 100vw;
   height: 100vh;
   padding: 30px;
   box-sizing: border-box;
   overflow: auto;
-}
-
-#game {
-  flex: 4;
-  background: #ccc;
-}
-
-#messages {
-  flex: 1;
-  background: #efefef;
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(230,230,230,1) 100%);
 }

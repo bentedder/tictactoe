@@ -12,14 +12,6 @@ export default {
     });
   },
 
-  setTurn: (user) => {
-    console.log(user);
-    GameDispatcher.handleAppAction({
-      type: ActionTypes.SET_TURN,
-      data: { user: user }
-    });
-  },
-
   sendMessage: (message) => {
     GameDispatcher.handleAppAction({
       type: ActionTypes.ADD_MESSAGE,
@@ -27,10 +19,11 @@ export default {
     });
   },
 
-  takeSquare: (square) => {
+  gameOver: (message) => {
     GameDispatcher.handleAppAction({
-      type: ActionTypes.TAKE_SQUARE,
-      data: { square: square }
-    })
+      type: ActionTypes.GAME_OVER,
+      data: { message: message }
+    });
   }
+
 }
