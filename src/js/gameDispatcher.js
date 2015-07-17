@@ -4,9 +4,17 @@ import GameConstants from "./gameConstants";
 let PayloadSources = GameConstants.PayloadSources;
 
 class GameDispatcher extends Dispatcher {
-  handleClientAction(action) {
+
+  handleViewAction(action) {
     this.dispatch({
       source: PayloadSources.VIEW_ACTION,
+      action: action
+    });
+  }
+
+  handleAppAction(action) {
+    this.dispatch({
+      source: PayloadSources.APP_ACTION,
       action: action
     });
   }

@@ -3,16 +3,14 @@ import KeyMirror from "keymirror";
 module.exports = {
 
   ActionTypes: KeyMirror({
-    START: null,
+    SELECT_SQUARE: null,
     UPDATE_SCORE: null,
-    CREATE_SQUARES: null,
     SEND_MESSAGE: null,
-    SET_TURN: null
   }),
 
   PayloadSources: KeyMirror({
-    BOT_ACTION: null,
-    VIEW_ACTION: null
+    VIEW_ACTION: null,
+    APP_ACTION: null
   })
 
 };

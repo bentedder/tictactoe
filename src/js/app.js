@@ -1,3 +1,5 @@
-import App from "./tictactoe";
+import Game from "./game/app";
+import MessageBoard from "./messages/app";
 
-new App({ name: "jack" });
+new Game();
+new MessageBoard();

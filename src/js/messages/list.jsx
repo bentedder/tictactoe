@@ -1,5 +1,5 @@
 const React = require("react");
-import BaseView from "../baseView.jsx";
+import BaseView from "../viewBase.jsx";
 
 class MessageList extends BaseView {
   render() {
