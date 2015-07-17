@@ -24,5 +24,21 @@ export default {
       type: ActionTypes.CREATE_SQUARES,
       data: { squares: squares }
     });
+  },
+
+  setTurn: (user) => {
+    console.log(user);
+    GameDispatcher.handleClientAction({
+      type: ActionTypes.SET_TURN,
+      data: { user: user }
+    });
+  },
+
+  sendMessage: (message) => {
+    console.log(message);
+    GameDispatcher.handleClientAction({
+      type: ActionTypes.ADD_MESSAGE,
+      data: { message: message }
+    });
   }
 }

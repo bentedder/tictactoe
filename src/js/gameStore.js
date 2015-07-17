@@ -5,9 +5,13 @@ import { EventEmitter } from "events";
 let ActionTypes = GameConstants.ActionTypes;
 
 let data = {
-  message: "waiting to start",
-  score: 0,
-  squares: []
+  squares: [],
+  messages: [{ type: "bot", text: "hello world" }],
+  score: {
+    bot: 0,
+    human: 0    
+  },
+  user: ""
 };
 
 class GameStore extends EventEmitter {
@@ -47,6 +51,14 @@ GameDispatcher.register((payload) => {
       break;
     case ActionTypes.CREATE_SQUARES:
       data.squares = action.data.squares;
+      _GameStore.emitChange();
+      break;
+    case ActionTypes.ADD_MESSAGE:
+      data.messages.push(action.data.message);
+      _GameStore.emitChange();
+      break;
+    case ActionTypes.SET_TURN:
+      data.user = action.data.user;
       _GameStore.emitChange();
       break;
     default:

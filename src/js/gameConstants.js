@@ -5,11 +5,13 @@ module.exports = {
   ActionTypes: KeyMirror({
     START: null,
     UPDATE_SCORE: null,
-    CREATE_SQUARES: null
+    CREATE_SQUARES: null,
+    SEND_MESSAGE: null,
+    SET_TURN: null
   }),
 
   PayloadSources: KeyMirror({
-    SERVER_ACTION: null,
+    BOT_ACTION: null,
     VIEW_ACTION: null
   })
 

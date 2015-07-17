@@ -1,5 +1,4 @@
 const React = require("react");
-import Actions from "../actions";
 import View from "./view.jsx";
 
 class Messages {
@@ -9,6 +8,7 @@ class Messages {
   }
 
   render() {
+    // jscs:disable
     React.render(<View/>, document.getElementById("messages"));
   }
 

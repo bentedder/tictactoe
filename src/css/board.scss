@@ -1,9 +1,25 @@
-.square {
-  display: block;
-  float: left;
-  margin: 10px;
-  width: 100px;
-  height: 100px;
-  background: #ccc;
-  cursor: pointer;
+.game-title {
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px 0;
+}
+.board {
+  width: 330px;
+  height: 330px;
+  margin: 10px auto;
+
+  .square {
+    display: block;
+    float: left;
+    margin: 10px 10px 0 0;
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    cursor: pointer;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
 }

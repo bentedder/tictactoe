@@ -1,10 +1,12 @@
 @import "board";
+@import "messages";
 
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 body {
@@ -14,14 +16,20 @@ body {
 #application {
   display: flex;
 }
+#game,
+#messages {
+  height: 100vh;
+  padding: 30px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
 #game {
   flex: 2;
   background: #ccc;
-  height: 100vh;
 }
 
 #messages {
   flex: 1;
   background: #efefef;
-  height: 100vh;
 }
