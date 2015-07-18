@@ -11,10 +11,10 @@ let data = {
   messages: [{ type: "bot", text: "hello world" }],
   score: {
     bot: 0,
-    human: 0,
-    tie: 0 
+    human: 0    
   },
-  activeUser: 1
+  activeUser: 1,
+  winner: null
 };
 
 class GameStore extends EventEmitter {
@@ -51,7 +51,6 @@ class GameStore extends EventEmitter {
   }
 
   selectSquare(square) {
-    let _this = this;
     let squares = _.each(data.squares, function(originalSquare) {
       if (originalSquare.id === square.id) {
         square.owner = data.activeUser;
@@ -59,29 +58,13 @@ class GameStore extends EventEmitter {
     });
     data.squares = squares;
 
-    let status = logic.getBoardStatus(data.squares, data.activeUser);
-    console.log(status);
-    if (status.gameOver === true) {
-      if (status.point === 1) {
-        data.score.human += 1;
-      } else if (status.point === 0) {
-        data.score.bot += 1;
-      } else {
-        data.score.tie += 1;
-      }
-      _.delay(function() {
-        _this.gameOver()
-      }, 2000);
-      
-    } else {
-      this.switchActiveUser();
-      this.recalculateSquareValues();
-    }
+    this.switchActiveUser();
+    this.recalculateSquareValues();
   }
 
   recalculateSquareValues() {
     let squares = logic.evaluateSquares(data.squares, data.activeUser);
-    let _this = this;
+    
     squares = _.filter(squares, function(square) {
       return square.owner === null;
     });
@@ -90,19 +73,15 @@ class GameStore extends EventEmitter {
       return square.value;
     });
 
-    // if (data.activeUser === 0) {
-    //   this.selectSquare(optimalChoice);
-    //   this.emitChange();
-    // }
+    if (data.activeUser === 0) {
+      this.selectSquare(optimalChoice);
+      this.emitChange();
+    }
   }
 
   gameOver() {
-    data.activeUser = 1;
     this.createSquares();
-    this.recalculateSquareValues();
     console.log("it's all over guy");
-    console.log(this.getState());
-    this.emitChange();
   }
 
 }
