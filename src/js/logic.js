@@ -10,7 +10,7 @@ let status = {
   point: null
 };
 
-class Jack {
+class Logic {
 
   createSquares() {
     status.gameOver = false;
@@ -161,4 +161,4 @@ class Jack {
 }
 
 
-export default new Jack();
+export default new Logic();

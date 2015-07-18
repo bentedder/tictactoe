@@ -1,6 +1,6 @@
 import GameDispatcher from "./gameDispatcher";
 import GameConstants from "./gameConstants";
-import jack from "./jack";
+import logic from "./logic";
 import { EventEmitter } from "events";
 import _ from "underscore";
 
@@ -45,7 +45,7 @@ class GameStore extends EventEmitter {
   }
 
   createSquares() {
-    let squares = jack.createSquares();
+    let squares = logic.createSquares();
     data.squares = squares;
   }
 
@@ -57,7 +57,7 @@ class GameStore extends EventEmitter {
     });
     data.squares = squares;
 
-    let status = jack.getBoardStatus(data.squares, data.activeUser);
+    let status = logic.getBoardStatus(data.squares, data.activeUser);
     console.log(status);
     if (status.gameOver === true) {
       if (status.point === 1) {
@@ -73,7 +73,7 @@ class GameStore extends EventEmitter {
   }
 
   recalculateSquareValues() {
-    let squares = jack.evaluateSquares(data.squares, data.activeUser);
+    let squares = logic.evaluateSquares(data.squares, data.activeUser);
     let _this = this;
     squares = _.filter(squares, function(square) {
       return square.owner === null;
