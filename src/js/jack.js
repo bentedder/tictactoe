@@ -74,6 +74,9 @@ class Jack {
     return squares;
   }
 
+  bumpCornerSquareValues(squares) {
+  }
+
   setOpenSquareValues(squares, combo) {
     _.map(squares, function(square) {
       if(_.contains(combo, square.id)) {
