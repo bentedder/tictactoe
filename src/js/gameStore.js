@@ -1,6 +1,6 @@
 import GameDispatcher from "./gameDispatcher";
 import GameConstants from "./gameConstants";
-import jack from "./jack";
+import logic from "./logic";
 import { EventEmitter } from "events";
 import _ from "underscore";
 
@@ -46,7 +46,7 @@ class GameStore extends EventEmitter {
   }
 
   createSquares() {
-    let squares = jack.createSquares();
+    let squares = logic.createSquares();
     data.squares = squares;
   }
 
@@ -63,7 +63,7 @@ class GameStore extends EventEmitter {
   }
 
   recalculateSquareValues() {
-    let squares = jack.evaluateSquares(data.squares, data.activeUser);
+    let squares = logic.evaluateSquares(data.squares, data.activeUser);
     
     squares = _.filter(squares, function(square) {
       return square.owner === null;

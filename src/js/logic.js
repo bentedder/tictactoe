@@ -37,6 +37,7 @@ class Jack {
 
     _.each(combinations, function(combo, i) {
       let diffOpp = _.difference(combo, opponentIDs);
+      let intOpp = _.intersection(combo, opponentIDs);
       let diffUser = _.difference(combo, userIDs);
 
       let opponentWins        = diffOpp.length === 0;
@@ -44,6 +45,8 @@ class Jack {
       let comboIsPossible     = diffOpp.length === 3;
       let opponentAboutToWin  = (diffOpp.length < 2) && (diffUser.length === 3);
       let userAboutToWin      = (diffUser.length < 2) && (diffOpp.length === 3);
+
+      console.log(intOpp);
 
       if (opponentWins) {
         _this.gameOver("The computer won...of course.")
