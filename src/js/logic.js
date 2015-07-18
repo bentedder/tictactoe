@@ -56,6 +56,8 @@ class Logic {
       let opponentAboutToWin  = (diffOpp.length < 2) && (diffUser.length === 3);
       let userAboutToWin      = (diffUser.length < 2) && (diffOpp.length === 3);
 
+      console.log(diffOpp);
+
       console.log(tieGame, opponentWins, userWins);
 
       if (tieGame) {
