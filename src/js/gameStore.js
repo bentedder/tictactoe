@@ -13,8 +13,7 @@ let data = {
     bot: 0,
     human: 0    
   },
-  activeUser: 1,
-  winner: null
+  activeUser: 1
 };
 
 class GameStore extends EventEmitter {
@@ -58,13 +57,24 @@ class GameStore extends EventEmitter {
     });
     data.squares = squares;
 
-    this.switchActiveUser();
-    this.recalculateSquareValues();
+    let status = jack.getBoardStatus(data.squares, data.activeUser);
+    console.log(status);
+    if (status.gameOver === true) {
+      if (status.point === 1) {
+        data.score.human += 1;
+      } else if (status.point === 0) {
+        data.score.bot += 1;
+      }
+      this.gameOver();
+    } else {
+      this.switchActiveUser();
+      this.recalculateSquareValues();
+    }
   }
 
   recalculateSquareValues() {
     let squares = jack.evaluateSquares(data.squares, data.activeUser);
-    
+    let _this = this;
     squares = _.filter(squares, function(square) {
       return square.owner === null;
     });
@@ -73,15 +83,19 @@ class GameStore extends EventEmitter {
       return square.value;
     });
 
-    // if (data.activeUser === 0) {
-    //   this.selectSquare(optimalChoice);
-    //   this.emitChange();
-    // }
+    if (data.activeUser === 0) {
+      this.selectSquare(optimalChoice);
+      this.emitChange();
+    }
   }
 
   gameOver() {
+    data.activeUser = 1;
     this.createSquares();
+    this.recalculateSquareValues();
     console.log("it's all over guy");
+    console.log(this.getState());
+    this.emitChange();
   }
 
 }

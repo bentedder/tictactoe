@@ -3,10 +3,20 @@ import _ from "underscore";
 
 let size = 3;
 let combinations = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
+let preferred = [0,2,4,6,8];
+let status = {
+  gameOver: false,
+  winner: "",
+  point: null
+};
 
 class Jack {
 
   createSquares() {
+    status.gameOver = false;
+    status.winner = "";
+    status.point = null;
+
     let squares = [];
     let i = 0;
 
@@ -41,16 +51,23 @@ class Jack {
 
       let opponentWins        = diffOpp.length === 0;
       let userWins            = diffUser.length === 0;
+      let tieGame             = _.where(squares, { owner: null } ).length < 1;
       let comboIsPossible     = diffOpp.length === 3;
       let opponentAboutToWin  = (diffOpp.length < 2) && (diffUser.length === 3);
       let userAboutToWin      = (diffUser.length < 2) && (diffOpp.length === 3);
 
-      if (opponentWins) {
-        _this.gameOver("The computer won...of course.")
+      console.log(tieGame, opponentWins, userWins);
+
+      if (tieGame) {
+        _this.gameOver();
+      }
+
+      else if (opponentWins) {
+        _this.gameOver(1-user);
       }
 
       else if (userWins) {
-        _this.gameOver("You won...wait a second.");
+        _this.gameOver(user);
       }
 
       else if (opponentAboutToWin) {
@@ -74,12 +91,12 @@ class Jack {
     return squares;
   }
 
-  bumpCornerSquareValues(squares) {
-  }
-
   setOpenSquareValues(squares, combo) {
     _.map(squares, function(square) {
       if(_.contains(combo, square.id)) {
+        square.value += 1;
+      }
+      if(_.contains(preferred, square.id)) {
         square.value += 1;
       }
     });
@@ -121,8 +138,10 @@ class Jack {
     return squares;
   }
 
-  gameOver(msg) {
-    console.log(msg);
+  gameOver(user) {
+    status.gameOver = true;
+    status.point = user;
+    status.winner = user ? user + " is the winner!" : "It's a tie";
   }
 
   getIDs(squares, user) {
@@ -132,6 +151,11 @@ class Jack {
 
     let IDs = _.pluck(userSquares, "id");
     return IDs;
+  }
+
+  getBoardStatus(squares, user) {
+    this.evaluateSquares(squares, user);
+    return status;
   }
 
 }
