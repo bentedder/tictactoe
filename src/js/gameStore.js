@@ -11,7 +11,8 @@ let data = {
   messages: [{ type: "bot", text: "hello world" }],
   score: {
     bot: 0,
-    human: 0    
+    human: 0,
+    tie: 0 
   },
   activeUser: 1
 };
@@ -65,6 +66,8 @@ class GameStore extends EventEmitter {
         data.score.human += 1;
       } else if (status.point === 0) {
         data.score.bot += 1;
+      } else {
+        data.score.tie += 1;
       }
       _.delay(function() {
         _this.gameOver()
@@ -87,10 +90,10 @@ class GameStore extends EventEmitter {
       return square.value;
     });
 
-    if (data.activeUser === 0) {
-      this.selectSquare(optimalChoice);
-      this.emitChange();
-    }
+    // if (data.activeUser === 0) {
+    //   this.selectSquare(optimalChoice);
+    //   this.emitChange();
+    // }
   }
 
   gameOver() {

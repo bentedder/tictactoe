@@ -3,7 +3,7 @@ import _ from "underscore";
 
 let size = 3;
 let combinations = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
-let preferred = [0,2,4,6,8];
+let preferred = [0,2,6,8];
 let status = {
   gameOver: false,
   winner: "",
@@ -99,6 +99,9 @@ class Logic {
       if(_.contains(preferred, square.id)) {
         square.value += 1;
       }
+      if(square.id === 4) {
+        square.value += 2;
+      }
     });
   }
 
@@ -140,7 +143,7 @@ class Logic {
 
   gameOver(user) {
     status.gameOver = true;
-    status.point = user;
+    status.point = user ? user : "tie";
     status.winner = user ? user + " is the winner!" : "It's a tie";
   }
 

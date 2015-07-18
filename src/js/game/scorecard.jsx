@@ -13,6 +13,9 @@ class Scorecard extends BaseView {
             Bot: {this.props.score.bot}
           </div>
         </div>
+        <div className='score-tie'>
+          Tie: {this.props.score.tie}
+        </div>
         <div className='score-human'>
           <svg version="1.1" className="icon x" x="0px" y="0px" viewBox="0 0 167.2 167.2">
             <line fill="none" stroke="url(#Gradient1)" strokeWidth="2px" x1="0.4" y1="0.4" x2="166.9" y2="166.9"/>
