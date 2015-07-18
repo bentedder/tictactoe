@@ -73,10 +73,10 @@ class GameStore extends EventEmitter {
       return square.value;
     });
 
-    if (data.activeUser === 0) {
-      this.selectSquare(optimalChoice);
-      this.emitChange();
-    }
+    // if (data.activeUser === 0) {
+    //   this.selectSquare(optimalChoice);
+    //   this.emitChange();
+    // }
   }
 
   gameOver() {

@@ -4,10 +4,6 @@ import Square from "./square.jsx";
 
 class Board extends BaseView {
 
-  select(e) {
-    console.log(e);
-  }
-
   render() {
     let squares = this.props.squares.map(function(square) {
       return <Square key={square.id} square={square} />
@@ -21,4 +17,5 @@ class Board extends BaseView {
     )
   }
 }
+
 export default Board;
