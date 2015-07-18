@@ -50,6 +50,7 @@ class GameStore extends EventEmitter {
   }
 
   selectSquare(square) {
+    let _this = this;
     let squares = _.each(data.squares, function(originalSquare) {
       if (originalSquare.id === square.id) {
         square.owner = data.activeUser;
@@ -65,7 +66,10 @@ class GameStore extends EventEmitter {
       } else if (status.point === 0) {
         data.score.bot += 1;
       }
-      this.gameOver();
+      _.delay(function() {
+        _this.gameOver()
+      }, 2000);
+      
     } else {
       this.switchActiveUser();
       this.recalculateSquareValues();

@@ -1,8 +1,8 @@
 .scorecard {
   position: absolute;
-  bottom: 0;
+  top: 85vmin;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%);
 
   .score-bot,
   .score-human {
