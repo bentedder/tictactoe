@@ -47,17 +47,27 @@ class GameStore extends EventEmitter {
 
   selectSquare(square) {
     data.squares[square.id].owner = data.activeUser;
+    var status = bot.checkBoard(data.squares, data.activeUser);
+    if (status.over) {
+      console.log("game is over");
+    }
   }
 
   takeTurns() {
+    var _this = this;
     this.switchActiveUser();
     // bot.evaluateSquares(data.squares, data.activeUser);
-    
     if (data.players[1].type === "bot" && data.activeUser === 1) {
-      var optimalChoice = _.max(data.squares, function(square) {
-        return square.value;
+      // var optimalChoice = _.max(data.squares, function(square) {
+      //   return square.value;
+      // });
+      var availableSquares = _.filter(data.squares, function(square) {
+        return square.owner === null;
       });
+
+      var optimalChoice = _.shuffle(availableSquares)[0];
       this.selectSquare(optimalChoice);
+      this.takeTurns();
     }
   }
 
@@ -81,12 +91,8 @@ GameDispatcher.register((payload) => {
 
     case ActionTypes.SELECT_SQUARE:
       _GameStore.selectSquare(action.data.square);
-      _GameStore.switchActiveUser();
+      _GameStore.takeTurns();
       _GameStore.emitChange();
-      if(_.filter(data.squares, function(square) { return square.owner === null}).length < 4) {
-        var d = bot.minimax(clone(data.squares), 10, clone(data.activeUser));
-        console.log("best choice is " + d);
-      }
       break;
 
     case ActionTypes.START:

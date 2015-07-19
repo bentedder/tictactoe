@@ -1,8 +1,17 @@
-import clone from "clone";
-import _ from "underscore";
+var clone = require("clone");
+var _ = require("underscore");
 
-let size = 3;
-let combinations = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
+var size = 3;
+var combinations = [
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+  [0,4,8],
+  [2,4,6]
+];
 
 var AI = {
 
@@ -27,15 +36,15 @@ var AI = {
   },
 
   evaluateSquares: function(squares, user) {
-    let _this = this;
-    let newSquares = clone(squares);
-    let newUser = clone(user);
+    var _this = this;
+    var newSquares = clone(squares);
+    var newUser = clone(user);
 
     _.each(newSquares, function(square) {
       if (square.owner !== null) {
         square.value = 0;
       } else {
-        square.value = _this.minimax(newSquares, newUser)
+        square.value = 0;
       }
     });
 
@@ -48,7 +57,7 @@ var AI = {
     var value = 0;
     // iterate through each possible move
     var doIt = function(squares) {
-      squares[id].owner = user;      
+      squares[id].owner = user;
       _.each(squares, function(square, i) {
         if (square.owner === null) {
           var status = _this.checkBoard(moves, user);
@@ -67,43 +76,48 @@ var AI = {
     return value;
   },
 
-  minimax: function(squares, depth, user) {
+  oldminimax: function(squares, user) {
     var _this = this;
     squares = clone(squares);
+    _user = clone(user);
     var status = this.checkBoard(squares, user);
-    console.log(status);
     if (status.over === true) {
-      console.log("we got to a result!!!!");
+      console.log("game over", status.value);
       return status.value;
     }
-
     if (user === 0) {
       var bestScore = -Infinity;
-      _.each(squares, function(possibility) {
+      _.map(squares, function(possibility) {
         if(possibility.owner === null) {
           console.log("trying user 0 in spot", possibility.id);
           var newGame = clone(squares);
           newGame[possibility.id].owner = 0;
-          var score = _this.minimax(newGame, depth - 1, 1);
-          if (score > bestScore) {
+          _user = 1;
+          var score = _this.minimax(newGame, 1);
+          if(score > bestScore) {
             bestScore = score;
           }
+          return bestScore;
         }
       });
+      console.log("user best score", bestScore);
       return bestScore;
     } else {
       var bestScore = Infinity;
-      _.each(squares, function(possibility) {
+      _.map(squares, function(possibility) {
         if(possibility.owner === null) {
-          var newGame = clone(squares);
           console.log("trying user 1 in spot", possibility.id);
+          var newGame = clone(squares);
           newGame[possibility.id].owner = 1;
-          var score = _this.minimax(newGame, depth - 1, 0);
-          if (score < bestScore) {
+          _user = 0;
+          var score = _this.minimax(newGame, 0);
+          if(score < bestScore) {
             bestScore = score;
           }
+          return bestScore;
         }
       });
+      console.log("opponent best score", bestScore);
       return bestScore;
     }
 
@@ -129,6 +143,7 @@ var AI = {
       if (tieGame) {
         _this.gameOver("nobody");
         status.over = true;
+        status.value = 0;
       }
 
       else if (opponentWins) {
@@ -162,8 +177,9 @@ var AI = {
   },
 
   gameOver: function(user) {
+    console.log(user, "wins");
   }
 
 }
 
-export default AI;
+module.exports = AI;

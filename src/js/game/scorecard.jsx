@@ -12,8 +12,10 @@ class Scorecard extends BaseView {
         </div>
       )
     });
+    let classString = " scorecard";
+    classString += this.props.user;
     return (
-      <div className='scorecard'>
+      <div className={classString}>
         {players}
         <div className='turn'>Turn: {this.props.user}</div>
       </div>
