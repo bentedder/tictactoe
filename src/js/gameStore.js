@@ -5,9 +5,9 @@ import { EventEmitter } from "events";
 import _ from "underscore";
 import bot from "./bot";
 
-let ActionTypes = GameConstants.ActionTypes;
+var ActionTypes = GameConstants.ActionTypes;
 
-let data = {
+var data = {
   players: [],
   squares: [],
   activeUser: 0
@@ -37,21 +37,17 @@ class GameStore extends EventEmitter {
 
   switchActiveUser() {
     data.activeUser = 1 - data.activeUser;
-    let status = logic.getBoardStatus(data.squares, data.activeUser); 
-    if (status.gameOver === true) {
-      this.gameOver();
-    } else {
-      if (data.players[1].type === "bot" && data.activeUser === 1) {
-        let optimalChoice = _.max(data.squares, function(square) {
-          return square.value;
-        });
-        this.selectSquare(optimalChoice);
-      }
+    bot.evaluateSquares(data.squares, data.activeUser);
+    if (data.players[1].type === "bot" && data.activeUser === 1) {
+      var optimalChoice = _.max(data.squares, function(square) {
+        return square.value;
+      });
+      this.selectSquare(optimalChoice);
     }
   }
 
   createSquares() {
-    let squares = logic.createSquares();
+    var squares = logic.createSquares();
     data.squares = squares;
   }
 
@@ -67,8 +63,8 @@ class GameStore extends EventEmitter {
   }
 
   recalculateSquareValues() {
-    let squares = bot.evaluateSquares(data.squares, data.activeUser);
-    data.squares = squares;
+    var revaluedBoard = bot.evaluateSquares(data.squares, data.activeUser);
+    data.squares = revaluedBoard;
   }
 
   gameOver() {

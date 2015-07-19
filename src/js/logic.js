@@ -17,12 +17,12 @@ class Logic {
     status.winner = "";
     status.point = null;
 
-    let squares = [];
-    let i = 0;
+    var squares = [];
+    var i = 0;
 
     _.times(size, function(row) {
       _.times(size, function(col) {
-        let square = {
+        var square = {
           id: i,
           row: row,
           col: col,
@@ -33,28 +33,27 @@ class Logic {
         i++;
       });
     });
-
     return squares;
   }
 
   evaluateSquares(squares, user) {
     console.clear();
-    let opponentIDs = this.getIDs(squares, 1 - user);
-    let userIDs = this.getIDs(squares, user);
-    let _this = this;
+    var opponentIDs = this.getIDs(squares, 1 - user);
+    var userIDs = this.getIDs(squares, user);
+    var _this = this;
 
     this.resetSquareValues(squares);
 
     _.each(combinations, function(combo, i) {
-      let diffOpp = _.difference(combo, opponentIDs);
-      let diffUser = _.difference(combo, userIDs);
+      var diffOpp = _.difference(combo, opponentIDs);
+      var diffUser = _.difference(combo, userIDs);
 
-      let opponentWins        = diffOpp.length === 0;
-      let userWins            = diffUser.length === 0;
-      let tieGame             = _.where(squares, { owner: null } ).length < 1;
-      let comboIsPossible     = diffOpp.length === 3;
-      let opponentAboutToWin  = (diffOpp.length < 2) && (diffUser.length === 3);
-      let userAboutToWin      = (diffUser.length < 2) && (diffOpp.length === 3);
+      var opponentWins        = diffOpp.length === 0;
+      var userWins            = diffUser.length === 0;
+      var tieGame             = _.where(squares, { owner: null } ).length < 1;
+      var comboIsPossible     = diffOpp.length === 3;
+      var opponentAboutToWin  = (diffOpp.length < 2) && (diffUser.length === 3);
+      var userAboutToWin      = (diffUser.length < 2) && (diffOpp.length === 3);
 
       if (tieGame) {
         _this.gameOver();
@@ -140,11 +139,11 @@ class Logic {
   }
 
   getIDs(squares, user) {
-    let userSquares = _.filter(squares, function(square) {
+    var userSquares = _.filter(squares, function(square) {
       return square.owner === user;
     });
 
-    let IDs = _.pluck(userSquares, "id");
+    var IDs = _.pluck(userSquares, "id");
     return IDs;
   }
 
