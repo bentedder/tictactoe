@@ -33,7 +33,7 @@ class Square extends BaseView {
   select() {
     let square = this.props.square;
     if (square.owner === null) {
-      ViewActions.selectSquare(this.props.square);
+      ViewActions.selectSquare(square);
     }
   }
 }
