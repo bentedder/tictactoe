@@ -3,26 +3,20 @@ import GameConstants from "./gameConstants";
 import logic from "./logic";
 import { EventEmitter } from "events";
 import _ from "underscore";
+import bot from "./bot";
 
 let ActionTypes = GameConstants.ActionTypes;
 
 let data = {
+  players: [],
   squares: [],
-  messages: [{ type: "bot", text: "hello world" }],
-  score: {
-    bot: 0,
-    human: 0    
-  },
-  activeUser: 1,
-  winner: null
+  activeUser: 0
 };
 
 class GameStore extends EventEmitter {
 
   constructor() {
     super();
-    this.createSquares();
-    this.recalculateSquareValues();
   }
 
   getState() {
@@ -43,6 +37,17 @@ class GameStore extends EventEmitter {
 
   switchActiveUser() {
     data.activeUser = 1 - data.activeUser;
+    let status = logic.getBoardStatus(data.squares, data.activeUser); 
+    if (status.gameOver === true) {
+      this.gameOver();
+    } else {
+      if (data.players[1].type === "bot" && data.activeUser === 1) {
+        let optimalChoice = _.max(data.squares, function(square) {
+          return square.value;
+        });
+        this.selectSquare(optimalChoice);
+      }
+    }
   }
 
   createSquares() {
@@ -51,32 +56,19 @@ class GameStore extends EventEmitter {
   }
 
   selectSquare(square) {
-    let squares = _.each(data.squares, function(originalSquare) {
+    _.map(data.squares, function(originalSquare) {
       if (originalSquare.id === square.id) {
         square.owner = data.activeUser;
       }
+      return originalSquare;
     });
-    data.squares = squares;
-
-    this.switchActiveUser();
     this.recalculateSquareValues();
+    this.switchActiveUser();
   }
 
   recalculateSquareValues() {
-    let squares = logic.evaluateSquares(data.squares, data.activeUser);
-    
-    squares = _.filter(squares, function(square) {
-      return square.owner === null;
-    });
-
-    let optimalChoice = _.max(squares, function(square) {
-      return square.value;
-    });
-
-    if (data.activeUser === 0) {
-      this.selectSquare(optimalChoice);
-      this.emitChange();
-    }
+    let squares = bot.evaluateSquares(data.squares, data.activeUser);
+    data.squares = squares;
   }
 
   gameOver() {
@@ -99,21 +91,16 @@ GameDispatcher.register((payload) => {
       _GameStore.emitChange();
       break;
 
-    case ActionTypes.ADD_MESSAGE:
-      data.messages.push(action.data.message);
+    case ActionTypes.START:
+      data.players = [
+        { name: "Player 1", id: 0, type: "human" },
+        { name: "Player 2", id: 1, type: action.data.opponentType }
+      ];
+      _GameStore.createSquares();
+      _GameStore.recalculateSquareValues();
       _GameStore.emitChange();
       break;
 
-    case ActionTypes.UPDATE_SCORE:
-      data.score = action.data.score;
-      _GameStore.emitChange();
-      break;
-
-    case ActionTypes.GAME_OVER:
-      data.messages.push(action.data.message);
-      _GameStore.gameOver();
-      _GameStore.emitChange();
-      break;
     default:
       break;
   }

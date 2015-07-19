@@ -10,6 +10,13 @@ export default {
       type: ActionTypes.SELECT_SQUARE,
       data: { square: square }
     });
+  },
+
+  start: (playerType) => {
+    GameDispatcher.handleViewAction({
+      type: ActionTypes.START,
+      data: { opponentType: playerType }
+    })
   }
 
 }

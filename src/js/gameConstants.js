@@ -4,14 +4,11 @@ module.exports = {
 
   ActionTypes: KeyMirror({
     SELECT_SQUARE: null,
-    UPDATE_SCORE: null,
-    SEND_MESSAGE: null,
-    GAME_OVER: null
+    START: null
   }),
 
   PayloadSources: KeyMirror({
-    VIEW_ACTION: null,
-    APP_ACTION: null
+    VIEW_ACTION: null
   })
 
 };

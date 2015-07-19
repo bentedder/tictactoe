@@ -1,5 +1,5 @@
-import AppActions from "./appActions";
 import _ from "underscore";
+import bot from "./bot";
 
 let size = 3;
 let combinations = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
@@ -10,7 +10,7 @@ let status = {
   point: null
 };
 
-class Jack {
+class Logic {
 
   createSquares() {
     status.gameOver = false;
@@ -68,13 +68,13 @@ class Jack {
         _this.gameOver(user);
       }
 
-      else if (opponentAboutToWin) {
-        _this.opponentWinning(squares, diffOpp[0]);
-      }
+      // else if (opponentAboutToWin) {
+      //   _this.opponentWinning(squares, diffOpp[0]);
+      // }
 
-      else if (userAboutToWin) {
-        _this.userWinning(squares, diffUser[0]);
-      }
+      // else if (userAboutToWin) {
+      //   _this.userWinning(squares, diffUser[0]);
+      // }
 
       else {
         _this.devaluePlayedSquares(squares);
@@ -149,11 +149,11 @@ class Jack {
   }
 
   getBoardStatus(squares, user) {
-    this.evaluateSquares(squares, user);
-    return status;
+    bot.evaluateSquares(squares, user);
+    // return status;
   }
 
 }
 
 
-export default new Jack();
+export default new Logic();

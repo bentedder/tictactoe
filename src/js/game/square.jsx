@@ -1,7 +1,6 @@
 const React = require("react");
 import BaseView from "../viewBase.jsx";
 import ViewActions from "../viewActions";
-import AppActions from "../appActions";
 
 class Square extends BaseView {
   render() {
@@ -35,8 +34,6 @@ class Square extends BaseView {
     let square = this.props.square;
     if (square.owner === null) {
       ViewActions.selectSquare(this.props.square);
-    } else {
-      AppActions.sendMessage({ type: "system", text: "Sorry, that square has already been claimed." });
     }
   }
 }

@@ -12,12 +12,6 @@ class GameDispatcher extends Dispatcher {
     });
   }
 
-  handleAppAction(action) {
-    this.dispatch({
-      source: PayloadSources.APP_ACTION,
-      action: action
-    });
-  }
 }
 
 let _GameDispatcher = new GameDispatcher();
