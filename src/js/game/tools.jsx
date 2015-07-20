@@ -6,11 +6,10 @@ class Tools extends BaseView {
   render() {
     let tools = "";
     if(this.props.over) {
-      tools = <button onClick={this.reset.bind(this)}>Play Again</button>
+      tools = <button className='again' onClick={this.reset.bind(this)}>Play Again</button>
     } else {
-      tools = <button onClick={this.reset.bind(this)}>Reset</button>
+      tools = <button className='reset' onClick={this.reset.bind(this)}>Reset</button>
     }
-
     return (
       <div className='tools'>
         {tools}

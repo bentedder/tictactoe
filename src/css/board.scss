@@ -1,8 +1,8 @@
 .board {
-  width: 65vm;
-  width: 65vmin;
-  height: 65vm;
-  height: 65vmin;
+  width: 60vm;
+  width: 60vmin;
+  height: 60vm;
+  height: 60vmin;
   position: absolute;
   top: 15vmin;
   left: 50%;
@@ -19,14 +19,6 @@
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #ccc;
     box-sizing: border-box;
-
-    .square-value {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #333;
-    }
 
     .icon {
       position: absolute;

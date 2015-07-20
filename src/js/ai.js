@@ -7,11 +7,19 @@ let grid = 3;
 let combos = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
 let board = [];
 let over = false;
-
+let score = {
+  user: 0,
+  tie: 0,
+  bot: 0
+}
 class AI {
 
   get Over() {
     return over;
+  }
+
+  get Score() {
+    return score;
   }
 
   get GridSize() {
@@ -23,6 +31,7 @@ class AI {
   }
 
   reset() {
+    over = false;
     board = [];
   }
 
@@ -35,6 +44,7 @@ class AI {
 
       if (this.checkStatus(0) === -1) {
         console.log("user won!");
+        score.user += 1;
         over = true;
         return;
       }
@@ -44,6 +54,7 @@ class AI {
 
       if (bestMove === undefined) {
         console.log("it's a tie!");
+        score.tie += 1;
         over = true;
         return;
       }
@@ -51,6 +62,7 @@ class AI {
       if (this.checkStatus(0) === 1) {
         console.log("bot won!");
         over = true;
+        score.bot += 1;
         return;
       }
     }   
@@ -91,11 +103,11 @@ class AI {
         board[i] = undefined;
         if (max === undefined || value > max) max = value;
         if (value > alpha) alpha = value;
-        if (alpha >= beta) return alpha; // prune branch
-        if (max > min){ min = max; next = i; } // best odds for next move
+        if (alpha >= beta) return alpha;
+        if (max > min){ min = max; next = i; }
       }
     }
-    return depth ? max || 0 : next; // 0 is tie game
+    return depth ? max || 0 : next;
   }
 }
 

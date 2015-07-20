@@ -9,7 +9,12 @@ var ActionTypes = GameConstants.ActionTypes;
 var data = {
   board: [],
   grid: 0,
-  over: false
+  over: false,
+  score: {
+    user: 0,
+    tie: 0,
+    bot: 0
+  }
 };
 
 class GameStore extends EventEmitter {
@@ -62,8 +67,9 @@ GameDispatcher.register((payload) => {
     case ActionTypes.SELECT_SQUARE:
       AI.selectSquare(action.data.square);
       data.board = AI.Board;
-      _GameStore.emitChange();
       if(AI.Over) _GameStore.gameOver();
+      data.score = AI.Score;
+      _GameStore.emitChange();
       break;
 
     case ActionTypes.RESET:
