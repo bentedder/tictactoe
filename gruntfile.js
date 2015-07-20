@@ -2,7 +2,7 @@ module.exports = function(grunt) {
   require("load-grunt-config")(grunt);
   require("time-grunt")(grunt);
 
-  var defaults = [ "clean", "files", "lint", "style" ];
+  var defaults = [ "clean", "files", "style", "browserify" ];
 
   var watching = [ "browserSync", "watch" ];
 

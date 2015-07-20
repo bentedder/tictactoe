@@ -22,7 +22,7 @@ class GameStore extends EventEmitter {
   constructor() {
     super();
     data.board = AI.Board;
-    data.grid = AI.GridSize
+    data.grid = AI.GridSize;
   }
 
   getState() {
@@ -62,12 +62,12 @@ export default _GameStore;
 
 GameDispatcher.register((payload) => {
   let action = payload.action;
-  switch(action.type) {
+  switch (action.type) {
 
     case ActionTypes.SELECT_SQUARE:
       AI.selectSquare(action.data.square);
       data.board = AI.Board;
-      if(AI.Over) _GameStore.gameOver();
+      if (AI.Over) _GameStore.gameOver();
       data.score = AI.Score;
       _GameStore.emitChange();
       break;

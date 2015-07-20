@@ -1,5 +1,5 @@
 const React = require("react");
-import GameStore from "./gameStore";
+import GameStore from "../gameStore";
 
 let getGameState = () => {
   return GameStore.getState();

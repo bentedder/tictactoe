@@ -1,5 +1,5 @@
 const React = require("react");
-import BaseView from "../viewBase.jsx";
+import BaseView from "./viewBase.jsx";
 import ViewActions from "../viewActions";
 
 class Square extends BaseView {

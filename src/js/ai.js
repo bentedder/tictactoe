@@ -1,17 +1,14 @@
 import _ from "underscore";
 
-// major inspiration from https://github.com/aglemann/tic-tac-toe/blob/master/tic-tac-toe.js
-// https://en.wikipedia.org/wiki/Negamax
-
 let grid = 3;
-let combos = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
+let combos = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
 let board = [];
 let over = false;
 let score = {
   user: 0,
   tie: 0,
   bot: 0
-}
+};
 class AI {
 
   get Over() {
@@ -59,7 +56,7 @@ class AI {
         return;
       }
       board[bestMove] = 1;
-      if (this.checkStatus(0) === 1) {
+      if (this.checkStatus() === 1) {
         console.log("bot won!");
         over = true;
         score.bot += 1;
@@ -68,7 +65,7 @@ class AI {
     }   
   }
 
-  checkStatus(depth) {
+  checkStatus() {
     var winner = null,
         bot, human;
     _.each(combos, function(combo) {
@@ -86,17 +83,19 @@ class AI {
     });
     return winner;
   }
-
-  findBestMove(depth, player, alpha, beta){
+  
+  // major inspiration from https://github.com/aglemann/tic-tac-toe/blob/master/tic-tac-toe.js
+  // https://en.wikipedia.org/wiki/Negamax
+  findBestMove(depth, player, alpha, beta) {
     var i = grid * grid,
         min = -Infinity,
         max,
         value,
         next;
-    if (value = this.checkStatus(depth)) {
+    if (value = this.checkStatus()) {
       return value * player;
     }
-    while(i--){
+    while (i--){
       if (!board[i]){
         board[i] = player;
         value = -this.findBestMove(depth + 1, -player, -beta, -alpha);

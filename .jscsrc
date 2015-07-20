@@ -5,8 +5,7 @@
     "while",
     "do",
     "try",
-    "catch",
-    "default"
+    "catch"
   ],
 
   "requireSpaceAfterKeywords": [
@@ -36,8 +35,6 @@
   "disallowEmptyBlocks": true,
 
   "requireSpacesInsideObjectBrackets": "allButNested",
-
-  "requireSpacesInsideArrayBrackets": "allButNested",
 
   "disallowQuotedKeysInObjects": "allButReserved",
 

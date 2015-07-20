@@ -16,7 +16,7 @@ export default {
     GameDispatcher.handleViewAction({
       type: ActionTypes.RESET,
       data: { }
-    })
+    });
   }
 
 }

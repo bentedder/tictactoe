@@ -1,5 +1,5 @@
 const React = require("react");
-import BaseView from "../viewBase.jsx";
+import BaseView from "./viewBase.jsx";
 import Square from "./square.jsx";
 import _ from "underscore";
 
