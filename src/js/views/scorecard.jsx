@@ -12,7 +12,7 @@ class Scorecard extends BaseView {
             <line fill="none" stroke="url(#Gradient1)" strokeWidth="2px" x1="0.4" y1="0.4" x2="166.9" y2="166.9"/>
             <line fill="none" stroke="url(#Gradient1)" strokeWidth="2px" x1="166.9" y1="0.4" x2="0.4" y2="166.9"/>
           </svg>
-          <div className='score'>{score.user}<small>User</small></div>
+          <div className='score'>{score.user}<small>You</small></div>
         </div>
         <div className='score-player'>
         <svg version="1.1" className="icon tie" x="0px" y="0px" viewBox="0 0 167.2 167.2">
