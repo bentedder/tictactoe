@@ -4,7 +4,7 @@ module.exports = {
 
   ActionTypes: KeyMirror({
     SELECT_SQUARE: null,
-    START: null
+    RESET: null
   }),
 
   PayloadSources: KeyMirror({

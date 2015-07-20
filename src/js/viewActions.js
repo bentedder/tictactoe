@@ -12,10 +12,10 @@ export default {
     });
   },
 
-  start: (playerType) => {
+  reset: (playerType) => {
     GameDispatcher.handleViewAction({
-      type: ActionTypes.START,
-      data: { opponentType: playerType }
+      type: ActionTypes.RESET,
+      data: { }
     })
   }
 

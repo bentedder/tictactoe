@@ -4,20 +4,22 @@ import ViewActions from "../viewActions";
 
 class Tools extends BaseView {
   render() {
+    let tools = "";
+    if(this.props.over) {
+      tools = <button onClick={this.reset.bind(this)}>Play Again</button>
+    } else {
+      tools = <button onClick={this.reset.bind(this)}>Reset</button>
+    }
+
     return (
       <div className='tools'>
-        <button onClick={this.start.bind(this)}>Start Human</button>
-        <button onClick={this.startBot.bind(this)}>Start Bot</button>
+        {tools}
       </div>
     )
   }
 
-  start() {
-    ViewActions.start("human");
-  }
-
-  startBot() {
-    ViewActions.start("bot");
+  reset() {
+    ViewActions.reset();
   }
 }
 export default Tools;

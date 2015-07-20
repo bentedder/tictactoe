@@ -4,21 +4,20 @@ import ViewActions from "../viewActions";
 
 class Square extends BaseView {
   render() {
-    let square = this.props.square;
+    let owner = this.props.owner;
     let classString = "square open";
-    switch(square.owner) {
-      case 0:
-        classString = "square o";
+    switch(owner) {
+      case -1:
+        classString = "square x";
         break;
       case 1:
-        classString = "square x";
+        classString = "square o";
         break;
       default:
         break;
     }
     return (
       <div className={classString} onClick={this.select.bind(this)}>
-        <div className="square-value">{ square.value }</div>
         <svg version="1.1" className="icon x" x="0px" y="0px" viewBox="0 0 167.2 167.2">
           <line fill="none" stroke="url(#Gradient1)" strokeWidth="2px" x1="0.4" y1="0.4" x2="166.9" y2="166.9"/>
           <line fill="none" stroke="url(#Gradient1)" strokeWidth="2px" x1="166.9" y1="0.4" x2="0.4" y2="166.9"/>
@@ -31,10 +30,8 @@ class Square extends BaseView {
   }
 
   select() {
-    let square = this.props.square;
-    if (square.owner === null) {
-      ViewActions.selectSquare(square);
-    }
+    let i = this.props.index;
+    ViewActions.selectSquare(i);
   }
 }
 export default Square;

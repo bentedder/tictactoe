@@ -1,17 +1,17 @@
 const React = require("react");
 import BaseView from "../viewBase.jsx";
 import Square from "./square.jsx";
+import _ from "underscore";
 
 class Board extends BaseView {
 
   render() {
-    let squares = this.props.squares.map(function(square) {
-      return <Square key={square.id} square={square} />
+    let board = this.props.board;
+    let squares = _.times(this.props.size, function(i) {
+      return <Square key={i} index={i} owner={board[i]}/>
     });
-    let classString = "board ";
-    classString += this.props.user === 0 ? "bot": "human";
     return (
-      <div className={classString}>
+      <div className='board'>
         {squares}
       </div>
     )

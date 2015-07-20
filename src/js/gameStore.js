@@ -2,21 +2,22 @@ import GameDispatcher from "./gameDispatcher";
 import GameConstants from "./gameConstants";
 import { EventEmitter } from "events";
 import _ from "underscore";
-import bot from "./bot";
-import clone from "clone";
+import AI from "./ai";
 
 var ActionTypes = GameConstants.ActionTypes;
 
 var data = {
-  players: [],
-  squares: [],
-  activeUser: 0
+  board: [],
+  grid: 0,
+  over: false
 };
 
 class GameStore extends EventEmitter {
 
   constructor() {
     super();
+    data.board = AI.Board;
+    data.grid = AI.GridSize
   }
 
   getState() {
@@ -24,7 +25,6 @@ class GameStore extends EventEmitter {
   }
 
   emitChange() {
-    console.log("change being emitted");
     this.emit("CHANGE");
   }
 
@@ -36,48 +36,18 @@ class GameStore extends EventEmitter {
     this.removeListener("CHANGE", cb);
   }
 
-  start() {
-    data.squares = bot.createSquares();
-    // bot.evaluateSquares(data.squares, data.activeUser);
-  }
-
   switchActiveUser() {
     data.activeUser = 1 - data.activeUser;
   }
 
-  selectSquare(square) {
-    data.squares[square.id].owner = data.activeUser;
-    var status = bot.checkBoard(data.squares, data.activeUser);
-    if (status.over) {
-      console.log("game is over");
-    }
-  }
-
-  takeTurns() {
-    var _this = this;
-    this.switchActiveUser();
-    // bot.evaluateSquares(data.squares, data.activeUser);
-    if (data.players[1].type === "bot" && data.activeUser === 1) {
-      // var optimalChoice = _.max(data.squares, function(square) {
-      //   return square.value;
-      // });
-      var availableSquares = _.filter(data.squares, function(square) {
-        return square.owner === null;
-      });
-
-      var optimalChoice = _.shuffle(availableSquares)[0];
-      this.selectSquare(optimalChoice);
-      this.takeTurns();
-    }
-  }
-
   gameOver() {
-    this.createSquares();
-    console.log("it's all over guy");
+    data.over = true;
   }
 
   reset() {
-    this.start();
+    data.over = false;
+    AI.reset();
+    data.board = AI.Board;
   }
 
 }
@@ -90,17 +60,14 @@ GameDispatcher.register((payload) => {
   switch(action.type) {
 
     case ActionTypes.SELECT_SQUARE:
-      _GameStore.selectSquare(action.data.square);
-      _GameStore.takeTurns();
+      AI.selectSquare(action.data.square);
+      data.board = AI.Board;
       _GameStore.emitChange();
+      if(AI.Over) _GameStore.gameOver();
       break;
 
-    case ActionTypes.START:
-      data.players = [
-        { name: "Player 1", id: 0, type: "human" },
-        { name: "Player 2", id: 1, type: action.data.opponentType }
-      ];
-      _GameStore.start();
+    case ActionTypes.RESET:
+      _GameStore.reset();
       _GameStore.emitChange();
       break;
 
