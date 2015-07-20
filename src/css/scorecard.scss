@@ -1,5 +1,6 @@
 .scorecard {
   position: absolute;
+  top: 82vm;
   top: 82vmin;
   left: 50%;
   transform: translate(-50%);
@@ -7,7 +8,9 @@
   .score-player {
     position: relative;
     display: inline-block;
+    height: 10vm;
     height: 10vmin;
+    width: 10vm;
     width: 10vmin;
     margin-right: 10px;
     text-align: center;

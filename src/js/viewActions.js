@@ -12,11 +12,11 @@ export default {
     });
   },
 
-  reset: (playerType) => {
+  reset: () => {
     GameDispatcher.handleViewAction({
       type: ActionTypes.RESET,
       data: { }
     });
   }
 
-}
+};

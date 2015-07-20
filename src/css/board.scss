@@ -1,9 +1,10 @@
 .board {
-  width: 60vm;
+  width: 60vm; /* for older IE */
   width: 60vmin;
-  height: 60vm;
+  height: 60vm; /* for older IE */
   height: 60vmin;
   position: absolute;
+  top: 15vm; /* for older IE */
   top: 15vmin;
   left: 50%;
   transform: translate(-50%, 0);
@@ -47,15 +48,17 @@
     }
     &.open {
       cursor: pointer;
-      &:hover {
-        .icon {
-          &.x {
-            display: block;
-            line {
-              stroke: #ccc;
+      @media (min-width: 1024px) {
+        &:hover {
+          .icon {
+            &.x {
+              display: block;
+              line {
+                stroke: #ccc;
+              }
             }
-          }
-        }    
+          }    
+        }        
       }
     }
     

@@ -3,7 +3,6 @@ import BaseView from "./viewBase.jsx";
 import Board from "./board.jsx";
 import Tools from "./tools.jsx";
 import Scorecard from "./scorecard.jsx";
-
 class GameView extends BaseView {
   render() {
     return (
